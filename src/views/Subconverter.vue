@@ -220,17 +220,12 @@ export default {
               {
                 label: "Yeechee4Clash",
                 value:
-                  "https://github.com/Yeecheee/Clash_Config/blob/main/Yeechee4Clash.ini"
+                  "https://raw.githubusercontent.com/Yeecheee/Clash_Config/main/Yeechee4Clash.ini"
               },
               {
                 label: "Yeechee4Clash_F",
                 value:
-                  "https://github.com/Yeecheee/Clash_Config/blob/main/Yeechee4Clash_F.ini"
-              },
-              {
-                label: "Yeechee4Clash_NoArea",
-                value:
-                  "https://github.com/Yeecheee/Clash_Config/blob/main/Yeechee4Clash_NoArea.ini"
+                  "https://raw.githubusercontent.com/Yeecheee/Clash_Config/main/Yeechee4Clash_F.ini"
               }
             ]
           }
