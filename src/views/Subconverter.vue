@@ -4,7 +4,7 @@
       <el-col>
         <el-card>
           <div slot="header">
-            Subscription Converter
+            Yeechee😙
             <svg-icon icon-class="github" style="margin-left: 20px" @click="goToProject" />
 
             <div style="display: inline-block; position:absolute; right: 20px">{{ backendVersion }}</div>
@@ -175,6 +175,9 @@
   </div>
 </template>
 
+
+
+
 <script>
 const project = process.env.VUE_APP_PROJECT
 const remoteConfigSample = process.env.VUE_APP_SUBCONVERTER_REMOTE_CONFIG
@@ -278,7 +281,7 @@ export default {
     };
   },
   created() {
-    document.title = "Subscription Converter";
+    document.title = "Yeechee😙";
     this.isPC = this.$getOS().isPc;
 
     // 获取 url cache
