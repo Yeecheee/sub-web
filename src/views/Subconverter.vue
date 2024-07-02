@@ -7,7 +7,9 @@
             Yeechee😙
             <svg-icon icon-class="github" style="margin-left: 20px" @click="goToProject" />
 
-            <div style="display: inline-block; position:absolute; right: 20px">{{ backendVersion }}</div>
+            <div style="display: inline-block; position: absolute; right: 20px">
+              {{ backendVersion }}
+            </div>
           </div>
           <el-container>
             <el-form :model="form" label-width="80px" label-position="left" style="width: 100%">
@@ -151,41 +153,42 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="uploadConfig = ''; dialogUploadConfigVisible = false">取 消</el-button>
+        <el-button @click="
+          uploadConfig = '';
+        dialogUploadConfigVisible = false;
+        ">取 消</el-button>
         <el-button type="primary" @click="confirmUploadConfig" :disabled="uploadConfig.length === 0">确 定</el-button>
       </div>
     </el-dialog>
 
     <el-dialog :visible.sync="dialogLoadConfigVisible" :show-close="false" :close-on-click-modal="false"
       :close-on-press-escape="false" width="700px">
-      <div slot="title">
-        解析 Subconverter 链接
-      </div>
-      <el-form label-position="left" :inline="true" >
+      <div slot="title">解析 Subconverter 链接</div>
+      <el-form label-position="left" :inline="true">
         <el-form-item prop="uploadConfig" label="订阅链接：" label-width="85px">
           <el-input v-model="loadConfig" style="width: 565px"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="loadConfig = ''; dialogLoadConfigVisible = false">取 消</el-button>
+        <el-button @click="
+          loadConfig = '';
+        dialogLoadConfigVisible = false;
+        ">取 消</el-button>
         <el-button type="primary" @click="confirmLoadConfig" :disabled="loadConfig.length === 0">确 定</el-button>
       </div>
     </el-dialog>
-
   </div>
 </template>
 
-
-
-
 <script>
-const project = process.env.VUE_APP_PROJECT
-const remoteConfigSample = process.env.VUE_APP_SUBCONVERTER_REMOTE_CONFIG
-const gayhubRelease = process.env.VUE_APP_BACKEND_RELEASE
-const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + '/sub?'
-const shortUrlBackend = process.env.VUE_APP_MYURLS_API
-const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_API
-const tgBotLink = process.env.VUE_APP_BOT_LINK
+const project = process.env.VUE_APP_PROJECT;
+const remoteConfigSample = process.env.VUE_APP_SUBCONVERTER_REMOTE_CONFIG;
+const gayhubRelease = process.env.VUE_APP_BACKEND_RELEASE;
+const defaultBackend =
+  process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + "/sub?";
+const shortUrlBackend = process.env.VUE_APP_MYURLS_API;
+const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_API;
+const tgBotLink = process.env.VUE_APP_BOT_LINK;
 
 export default {
   data() {
@@ -210,12 +213,16 @@ export default {
           ssd: "ssd",
           sssub: "sssub",
           ssr: "ssr",
-          ClashR: "clashr",          
+          ClashR: "clashr",
           V2Ray: "v2ray",
           Trojan: "trojan",
-          Surge3: "surge&ver=3",
+          Surge3: "surge&ver=3"
         },
-        backendOptions: [{ value: "https://subapi.88996644.xyz:25500/sub?" }],
+        backendOptions: [
+          {
+            value: "https://subapi.88996644.xyz:8964/sub?"
+          }
+        ],
         remoteConfig: [
           {
             label: "Yeechee",
@@ -231,8 +238,33 @@ export default {
                   "https://raw.githubusercontent.com/Yeecheee/Clash_Config/main/Yeechee4Clash_F.ini"
               }
             ]
+          },
+          {
+            label: "TEST",
+            options: [
+              {
+                label: "TEST1",
+                value:
+                  "https://raw.githubusercontent.com/Yeecheee/Clash_Config/main/test1.ini"
+              },
+              {
+                label: "TEST2",
+                value:
+                  "https://raw.githubusercontent.com/Yeecheee/Clash_Config/main/test2.ini"
+              }
+            ]
+          },
+          {
+            label: "DEFAULT",
+            options: [
+              {
+                label: "Default",
+                value:
+                  "https://raw.githubusercontent.com/Yeecheee/Clash_Config/main/Default.ini"
+              }
+            ]
           }
-        ]
+        ],
       },
       form: {
         sourceSubUrl: "",
@@ -257,12 +289,12 @@ export default {
         // tpl 定制功能
         tpl: {
           surge: {
-            doh: false // dns 查询是否使用 DoH
+            doh: false, // dns 查询是否使用 DoH
           },
           clash: {
-            doh: false
-          }
-        }
+            doh: false,
+          },
+        },
       },
 
       loading: false,
@@ -285,8 +317,8 @@ export default {
     this.isPC = this.$getOS().isPc;
 
     // 获取 url cache
-    if (process.env.VUE_APP_USE_STORAGE === 'true') {
-      this.form.sourceSubUrl = this.getLocalStorageItem('sourceSubUrl')
+    if (process.env.VUE_APP_USE_STORAGE === "true") {
+      this.form.sourceSubUrl = this.getLocalStorageItem("sourceSubUrl");
     }
   },
   mounted() {
@@ -392,7 +424,7 @@ export default {
           this.form.sort.toString();
 
         if (this.needUdp) {
-          this.customSubUrl += "&udp=" + this.form.udp.toString()
+          this.customSubUrl += "&udp=" + this.form.udp.toString();
         }
 
         if (this.form.tpl.surge.doh === true) {
@@ -425,10 +457,10 @@ export default {
       this.$axios
         .post(shortUrlBackend, data, {
           header: {
-            "Content-Type": "application/form-data; charset=utf-8"
-          }
+            "Content-Type": "application/form-data; charset=utf-8",
+          },
         })
-        .then(res => {
+        .then((res) => {
           if (res.data.Code === 1 && res.data.ShortUrl !== "") {
             this.curtomShortSubUrl = res.data.ShortUrl;
             this.$copyText(res.data.ShortUrl);
@@ -454,7 +486,7 @@ export default {
           "i",
           { style: "color: teal" },
           "各种订阅链接（短链接服务除外）生成纯前端实现，无隐私问题。默认提供后端转换服务，隐私担忧者请自行搭建后端服务。"
-        )
+        ),
       });
     },
     confirmUploadConfig() {
@@ -467,22 +499,24 @@ export default {
 
       let body = {
         content: this.uploadConfig,
-      }
-      this.$axios.post(configUploadBackend, body).then(res => {
-        if (res.data.code === 0 && res.data.data.url !== "") {
-          this.$message.success(
-            "远程配置上传成功，配置链接已复制到剪贴板，有效期三个月望知悉"
-          );
+      };
+      this.$axios
+        .post(configUploadBackend, body)
+        .then((res) => {
+          if (res.data.code === 0 && res.data.data.url !== "") {
+            this.$message.success(
+              "远程配置上传成功，配置链接已复制到剪贴板，有效期三个月望知悉"
+            );
 
-          // 自动填充至『表单-远程配置』
-          this.form.remoteConfig = res.data.data.url;
-          this.$copyText(this.form.remoteConfig);
+            // 自动填充至『表单-远程配置』
+            this.form.remoteConfig = res.data.data.url;
+            this.$copyText(this.form.remoteConfig);
 
-          this.dialogUploadConfigVisible = false;
-        } else {
-          this.$message.error("远程配置上传失败: " + res.data.msg);
-        }
-      })
+            this.dialogUploadConfigVisible = false;
+          } else {
+            this.$message.error("远程配置上传失败: " + res.data.msg);
+          }
+        })
         .catch(() => {
           this.$message.error("远程配置上传失败");
         })
@@ -491,10 +525,10 @@ export default {
         });
     },
     /**
- * Asynchronously analyzes the URL.
- *
- * @return {Promise<string>} The result of the analysis.
- */
+     * Asynchronously analyzes the URL.
+     *
+     * @return {Promise<string>} The result of the analysis.
+     */
     async analyzeUrl() {
       // Check if `loadConfig` includes "target"
       if (this.loadConfig.includes("target")) {
@@ -599,7 +633,7 @@ export default {
       cb(results);
     },
     createFilter(queryString) {
-      return candidate => {
+      return (candidate) => {
         return (
           candidate.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
         );
@@ -610,44 +644,44 @@ export default {
         .get(
           defaultBackend.substring(0, defaultBackend.length - 5) + "/version"
         )
-        .then(res => {
+        .then((res) => {
           this.backendVersion = res.data.replace(/backend\n$/gm, "");
           this.backendVersion = this.backendVersion.replace("subconverter", "");
         });
     },
     saveSubUrl() {
-      if (this.form.sourceSubUrl !== '') {
-        this.setLocalStorageItem('sourceSubUrl', this.form.sourceSubUrl)
+      if (this.form.sourceSubUrl !== "") {
+        this.setLocalStorageItem("sourceSubUrl", this.form.sourceSubUrl);
       }
     },
     getLocalStorageItem(itemKey) {
-      const now = +new Date()
-      let ls = localStorage.getItem(itemKey)
+      const now = +new Date();
+      let ls = localStorage.getItem(itemKey);
 
-      let itemValue = ''
+      let itemValue = "";
       if (ls !== null) {
-        let data = JSON.parse(ls)
+        let data = JSON.parse(ls);
         if (data.expire > now) {
-          itemValue = data.value
+          itemValue = data.value;
         } else {
-          localStorage.removeItem(itemKey)
+          localStorage.removeItem(itemKey);
         }
       }
 
-      return itemValue
+      return itemValue;
     },
     setLocalStorageItem(itemKey, itemValue) {
-      const ttl = process.env.VUE_APP_CACHE_TTL
-      const now = +new Date()
+      const ttl = process.env.VUE_APP_CACHE_TTL;
+      const now = +new Date();
 
       let data = {
         setTime: now,
         ttl: parseInt(ttl),
         expire: now + ttl * 1000,
-        value: itemValue
-      }
-      localStorage.setItem(itemKey, JSON.stringify(data))
-    }
+        value: itemValue,
+      };
+      localStorage.setItem(itemKey, JSON.stringify(data));
+    },
   },
 };
 </script>
